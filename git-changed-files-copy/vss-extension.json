@@ -1,0 +1,50 @@
+{
+    "manifestVersion": 1,
+    "id": "git-changed-files-copy2",
+    "name": "git-changed-files-copy",
+    "version": "0.0.1",
+    "publisher": "limin",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "copy a git branch all changed files",
+    "categories": [
+        "Build and release"
+    ],
+    "icons": {
+        "default": "images/extension-icon.png"        
+    },
+    "files": [
+        {
+            "path": "task"
+        }
+    ],
+	 "tags": [
+	    "Copy",
+	    "Branch Changes",
+		"Git Diff",
+	    "Build",
+	    "Git"
+	  ],
+	  	"screenshots": [
+	    
+	  ],
+		"repository": {
+			"type":"git",
+	      	"uri": "http://github.com/lean-soft/"
+	    },
+    "contributions": [
+        {
+            "id": "git-changed-files-copy2",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "task"
+            }
+        }
+    ]
+}
