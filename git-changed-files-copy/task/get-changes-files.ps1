@@ -1,4 +1,6 @@
-﻿#[CmdletBinding()]
+﻿[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
+#[CmdletBinding()]
 #param()
 
  $workingDir = $env:SYSTEM_DEFAULTWORKINGDIRECTORY 
@@ -15,7 +17,12 @@ $destination = "diff"
 #$shouldFlattenInput = Get-VstsInput -Name flatten 
 $changeType = "A,C,M,R,T"
 $shouldFlatten = $False
-$branchName = $env:BUILD_SOURCEBRANCHNAME
+$buildReason = $env:BUILD_REASON # PullRequest
+# $branchName =  $env:BUILD_SOURCEBRANCHNAME
+$branchName = $env:SYSTEM_PULLREQUEST_SOURCEBRANCH
+$targetBranch = $env:SYSTEM_PULLREQUEST_TARGETBRANCH
+
+"buildReason is $buildReason,branchName is $branchName, targetBranch is $targetBranch"
 
 if (!($env:SYSTEM_ACCESSTOKEN ))
 {
@@ -28,10 +35,9 @@ if (!($env:SYSTEM_ACCESSTOKEN ))
 try {
 	Write-Verbose "Setting working directory to '$workingDir'."
     Set-Location $workingDir
-	Write-Verbose "Current commit is $currentCommit"
-	[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+	Write-Verbose "Current commit is $currentCommit"	
 	
-	git checkout master
+	git checkout $targetBranch
 
 	git config core.quotepath off
 	
