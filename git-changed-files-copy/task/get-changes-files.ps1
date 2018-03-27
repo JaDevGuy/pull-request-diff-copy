@@ -23,10 +23,9 @@ if ($buildReason -ne "PullRequest")
    throw ("this task must trigge by git pull request,plz set target branch policy at first.")
 }
 
-# $branchName =  $env:BUILD_SOURCEBRANCHNAME
-$branchName = ($env:SYSTEM_PULLREQUEST_SOURCEBRANCH).split("/")[2]
-$targetBranch = ($env:SYSTEM_PULLREQUEST_TARGETBRANCH).split("/")[2]
-
+$branchName = ($env:SYSTEM_PULLREQUEST_SOURCEBRANCH).Replace("refs/heads/","")
+$targetBranch = ($env:SYSTEM_PULLREQUEST_TARGETBRANCH).Replace("refs/heads/","")
+"SYSTEM_PULLREQUEST_SOURCEBRANCH:" + ($env:SYSTEM_PULLREQUEST_SOURCEBRANCH) + ",SYSTEM_PULLREQUEST_TARGETBRANCH："+($env:SYSTEM_PULLREQUEST_TARGETBRANCH)
 "buildReason is $buildReason,branchName is $branchName, targetBranch is $targetBranch"
 
 if (!($env:SYSTEM_ACCESSTOKEN ))
