@@ -1,9 +1,9 @@
 {
     "id": "bbdc143b-c004-4266-8e12-b6481cc22d5a",
-    "name": "git-changed-files-copy2",
+    "name": "git changed files copy",
     "friendlyName": "copy a git branch all changed files",
     "description": "copy a git branch all changed files",
-    "helpMarkDown": "## copy a git branch all changed files",
+    "helpMarkDown": "## copy a git branch all changed files.this task must trigge by git pull request,[set target branch policy at first](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build)",
     "category": "Utility",
     "visibility": [
         "Build",
@@ -25,23 +25,7 @@
             "defaultValue": "$(Build.ArtifactStagingDirectory)/diff",
             "required": true,
             "helpMarkDown": "The directory where files should be placed."
-	},
-	{
-		"name": "changeType",
-		"type": "pickList",
-		"label": "Change Type",
-		"defaultValue": "A,C,M,R,T",
-		"required": true,
-		"helpMarkDown": "Specify which files to copy by change type",
-		"options": {
-                "A": "Added",
-				"C": "Copied",
-                "M": "Modified",
-                "R": "Renamed",
-                "T": "Type Changed",
-				"A,C,M,R,T":"All"
-            }
-	},
+	},	
 	{
 		"name": "flatten",
 		"type": "boolean",
@@ -51,12 +35,12 @@
 		"helpMarkDown": "Flatten directory structure (all files to same directory)"
 	},
 	{
-		"name": "only current commit",
+		"name": "currentCommit",
 		"type": "boolean",
-		"label": "IsCurrentCommit",
+		"label": "only current commit",
 		"defaultValue": false,
 		"required": false,
-		"helpMarkDown": "only copy current commit changes(TODO，Not Implementation Feature)"
+		"helpMarkDown": "only copy current commit changes"
 	}
 	],
 	"execution": {

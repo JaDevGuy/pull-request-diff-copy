@@ -1,8 +1,8 @@
 {
     "manifestVersion": 1,
-    "id": "git-changed-files-copy2",
-    "name": "git-changed-files-copy",
-    "version": "0.0.1",
+    "id": "git-changed-files-copy",
+    "name": "git changed files copy",
+    "version": "0.1.0",
     "publisher": "limin",
     "targets": [
         {
@@ -37,7 +37,7 @@
 	    },
     "contributions": [
         {
-            "id": "git-changed-files-copy2",
+            "id": "git-changed-files-copy",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"

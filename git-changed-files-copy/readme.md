@@ -1,0 +1,2 @@
+## copy a git branch all changed files.
+this task must trigge by git pull request,[set target branch policy at first](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build)
