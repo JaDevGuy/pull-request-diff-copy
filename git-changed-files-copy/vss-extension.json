@@ -1,15 +1,15 @@
 {
     "manifestVersion": 1,
-    "id": "git-changed-files-copy",
-    "name": "git changed files copy",
+    "id": "pull-request-diff-copy",
+    "name": "Pull Request Diff Copy",
     "version": "0.1.0",
-    "publisher": "limin",
+    "publisher": "lean-soft",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
     ],    
-    "description": "copy a git branch all changed files",
+    "description": "Copy a git branch of all changed files to diff directory",
     "categories": [
         "Build and release"
     ],
@@ -21,6 +21,11 @@
             "path": "task"
         }
     ],
+    "content": {
+        "details": {
+            "path": "readme.md"
+        }
+    },
 	 "tags": [
 	    "Copy",
 	    "Branch Changes",
@@ -33,11 +38,11 @@
 	  ],
 		"repository": {
 			"type":"git",
-	      	"uri": "http://github.com/lean-soft/"
+	      	"uri": "https://github.com/lean-soft/pull-request-diff-copy"
 	    },
     "contributions": [
         {
-            "id": "git-changed-files-copy",
+            "id": "pull-request-diff-copy",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"

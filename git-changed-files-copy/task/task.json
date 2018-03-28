@@ -1,9 +1,9 @@
 {
     "id": "bbdc143b-c004-4266-8e12-b6481cc22d5a",
-    "name": "git changed files copy",
-    "friendlyName": "copy a git branch all changed files",
-    "description": "copy a git branch all changed files",
-    "helpMarkDown": "## copy a git branch all changed files.this task must trigge by git pull request,[set target branch policy at first](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build)",
+    "name": "Pull Request Diff Copy",
+    "friendlyName": "Pull Request Diff Copy",
+    "description": "Copy a git branch of all changed files to diff directory",
+    "helpMarkDown": "## Copy a git branch of all changed files to diff directory.this task must trigge by git pull request,[set target branch policy at first](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build)",
     "category": "Utility",
     "visibility": [
         "Build",
@@ -16,7 +16,7 @@
         "Patch": 0
     },
    "minimumAgentVersion": "1.95.0",
-	"instanceNameFormat": "git changed files copy $(message)",
+	"instanceNameFormat": "Pull Request Diff Copy $(message)",
 	"inputs": [
 	{
 			"name": "destination",
@@ -37,7 +37,7 @@
 	{
 		"name": "currentCommit",
 		"type": "boolean",
-		"label": "only current commit",
+		"label": "Only current commit",
 		"defaultValue": false,
 		"required": false,
 		"helpMarkDown": "only copy current commit changes"
