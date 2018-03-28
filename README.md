@@ -1,9 +1,9 @@
-# VSTS扩展仓库源码
+# VSTS Extension Source Rep
 
 
 ## Pull Request Diff Copy
 
-[详细参考这里](pull-request-diff-copy/readme.md)
+[Check details from here](pull-request-diff-copy/readme.md)
 
 
 
