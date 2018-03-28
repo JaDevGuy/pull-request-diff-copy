@@ -8,7 +8,11 @@
         {
             "id": "Microsoft.VisualStudio.Services"
         }
-    ],    
+    ],  
+    "galleryFlags": [
+        "Public",
+        "Preview"
+    ],  
     "description": "Copy a git branch of all changed files to diff directory",
     "categories": [
         "Build and release"

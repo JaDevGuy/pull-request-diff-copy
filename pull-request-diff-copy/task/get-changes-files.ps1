@@ -20,7 +20,8 @@ $changeType = "A,C,M,R,T"
 $buildReason = $env:BUILD_REASON # PullRequest
 if ($buildReason -ne "PullRequest")
 {
-   throw ("this task must trigge by git pull request,plz set target branch policy at first.")
+	"Pull Request Diff Copy will only process when triggered by Pull Request Build."
+	return;
 }
 
 $branchName = ($env:SYSTEM_PULLREQUEST_SOURCEBRANCH).Replace("refs/heads/","")
