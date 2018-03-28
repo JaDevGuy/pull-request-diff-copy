@@ -14,3 +14,6 @@ this task must trigge by git pull request,[set target branch policy at first](ht
 * Set Branch policy,and Trigge by PR
 
 
+## TKS
+
+This is my first VSTS Extension，I found Similar Extension [from here](https://marketplace.visualstudio.com/items?itemName=visualbean.VisualBean-GitCopyDiff).So, I refer to GitCopyDiff some of ps script, TKS the Author Alexander Carlsen.
