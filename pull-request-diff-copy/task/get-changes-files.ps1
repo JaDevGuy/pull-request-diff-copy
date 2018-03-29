@@ -63,8 +63,8 @@ try {
 	[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 	
  if($isCurrentCommit) {
-	"git log -m -1 --name-status --pretty=format: $sha > diff.txt"
-	 git log -m -1 --name-status --pretty=format: $sha > diff.txt
+	"git log -m -1 --name-status --pretty=format: $sha > join-path $destination diff.txt;"
+	 git log -m -1 --name-status --pretty=format: $sha > join-path $destination diff.txt;
  
 	 git log -m -1 --name-status --pretty=format: $sha | foreach{
 	 if($_ -eq "") {
@@ -84,8 +84,8 @@ try {
  }
  else {
  
-	"git diff $sha head --name-status > diff.txt"
-	git diff $sha head --name-status > diff.txt
+	"git diff $sha head --name-status > join-path $destination diff.txt;"
+	git diff $sha head --name-status > join-path $destination diff.txt;
  
 	git diff $sha head --name-status | foreach{
 	if($_ -eq "") {
