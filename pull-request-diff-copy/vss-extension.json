@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "pull-request-diff-copy",
     "name": "Pull Request Diff Copy",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "publisher": "lean-soft",
     "targets": [
         {
@@ -13,7 +13,7 @@
         "Public",
         "Preview"
     ],  
-    "description": "Copy a git branch of all changed files to diff directory",
+    "description": "Copy the changes on Pull Request to a folder",
     "categories": [
         "Build and release"
     ],
