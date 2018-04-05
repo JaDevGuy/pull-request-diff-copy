@@ -108,7 +108,7 @@ try {
 	IF($shouldFlatten)
 	{
 		 $changes | foreach {			
-			 $destinationPath = join-path $destination "Content" $_.Split("/")[$_.Split("/").Length-1];
+			 $destinationPath = join-path $destination $_.Split("/")[$_.Split("/").Length-1];
 			 "destinationPath is: " + $destinationPath 
 		   if(-not (Test-Path -Path $destination )){
 				 mkdir $destination
@@ -120,7 +120,7 @@ try {
 	{
 		$changes | foreach {
 		#"ready copy change file: " + $_ 
-		$destinationPath = join-path $destination  "Content"  $_;
+		$destinationPath = join-path $destination $_;
 		"destinationPath is: " + $destinationPath
 		New-Item -ItemType File -Path "$destinationPath" -Force | out-null
 		Copy-Item $_ -Destination "$destinationPath" -recurse -container;
