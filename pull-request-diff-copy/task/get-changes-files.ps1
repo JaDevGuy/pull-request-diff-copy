@@ -55,7 +55,9 @@ try {
 	
 	"Get $branchName merge-base to $targetBranch"
 
-	$expressCmd = "git merge-base $env:SYSTEM_PULLREQUEST_TARGETBRANCH $env:SYSTEM_PULLREQUEST_SOURCEBRANCH"
+	git fetch
+
+	$expressCmd = "git merge-base '$env:SYSTEM_PULLREQUEST_TARGETBRANCH' '$env:SYSTEM_PULLREQUEST_SOURCEBRANCH'"
 
 	"Invoke-Expression " + $expressCmd
 
@@ -68,7 +70,7 @@ try {
 		"Command [$expressCmd] return commit id: " + $sha
 	}
 
-	$expressCmd = "git diff $sha $env:SYSTEM_PULLREQUEST_SOURCEBRANCH --name-status"
+	$expressCmd = "git diff '$sha' '$env:SYSTEM_PULLREQUEST_SOURCEBRANCH' --name-status"
 
 	"Invoke-Expression " + $expressCmd
 
