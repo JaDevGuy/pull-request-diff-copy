@@ -104,8 +104,6 @@ try {
 	}
  }
 
- 	# this will fix the slash direction
- 	$destination = join-path $destination
 	"Copy changes to folder " + $destination
 	$destinationContentFolder = join-path $destination "Content"
 	IF($shouldFlatten)
