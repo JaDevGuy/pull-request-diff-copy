@@ -57,7 +57,9 @@ try {
 
 	$expressCmd = "git merge-base $env:SYSTEM_PULLREQUEST_TARGETBRANCH $env:SYSTEM_PULLREQUEST_SOURCEBRANCH"
 
-	Invoke-Expression $expressCmd | foreach
+	$expressCmd
+
+	& $expressCmd | foreach
 	{
 		$sha = $_
 		
@@ -68,9 +70,9 @@ try {
 
 	$expressCmd
 
-	Invoke-Expression $expressCmd > diff.txt
+	& $expressCmd > diff.txt
 	
-	Invoke-Expression $expressCmd | foreach
+	& $expressCmd | foreach
 	{
 		if($_ -eq "") 
 		{
