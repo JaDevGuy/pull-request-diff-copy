@@ -59,7 +59,7 @@ try {
 
 	$expressCmd
 
-	$cmdResult = & $expressCmd
+	Invoke-Expression $expressCmd | $result
 
 	foreach ($result in $cmdResult)
 	{
