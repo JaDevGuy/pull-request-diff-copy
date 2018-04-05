@@ -59,9 +59,11 @@ try {
 
 	$expressCmd
 
-	& $expressCmd | foreach
+	$cmdResult = & $expressCmd
+
+	foreach $result in $cmdResult
 	{
-		$sha = $_
+		$sha = $result
 		
 		"Command [$expressCmd] return commit id: " + $sha
 	}
