@@ -49,53 +49,39 @@ try {
 	#git checkout $targetBranch	
 	#git checkout $branchName
 	
-	"Get $targetBranch merge-base to master"
-	git merge-base master head | foreach{
-		$sha = $_
-		"merge-base to master commit id is: " + $sha
-	}  
+	"Get $branchName merge-base to $targetBranch"
 
-	#[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-	
-	if($isCurrentCommit) {
-		"git log -m -1 --name-status --pretty=format: $sha > diff.txt;"
-		git log -m -1 --name-status --pretty=format: $sha > diff.txt;
-	
-		git log -m -1 --name-status --pretty=format: $sha | foreach{
-		if($_ -eq "") {
-			return;
-		}
-		"get change file: " + $_    
-		$item = $_.Split([char]0x0009);
-		$item[0] = $item[0].substring(0,1);
-		if($changeType.Contains($item[0])){
-			if($item[0].Contains("R")){
-				$changes += ,$item[2];
-			} else {
-				$changes += ,$item[1];
-			}
-			}
-		}
+	git merge-base $env:SYSTEM_PULLREQUEST_TARGETBRANCH $env:SYSTEM_PULLREQUEST_SOURCEBRANCH | foreach
+	{
+		$sha = $_
+		
+		"merge-base to $env:SYSTEM_PULLREQUEST_SOURCEBRANCH commit id is: " + $sha
 	}
-	else {
+
+	"git diff $sha $env:SYSTEM_PULLREQUEST_SOURCEBRANCH --name-status > diff.txt"
+
+	git diff $sha $env:SYSTEM_PULLREQUEST_SOURCEBRANCH --name-status > diff.txt
 	
-		"git diff $sha head --name-status > diff.txt;"
-		git diff $sha head --name-status > diff.txt;
-	
-		git diff $sha head --name-status | foreach{
-		if($_ -eq "") {
+	git diff $sha $env:SYSTEM_PULLREQUEST_SOURCEBRANCH --name-status | foreach
+	{
+		if($_ -eq "") 
+		{
 			return;
 		}
-		"get change file: " + $_    
+
+		"get change file: " + $_
+
 		$item = $_.Split([char]0x0009);
-		$item[0] = $item[0].substring(0,1);
-		if($changeType.Contains($item[0])){
-			if($item[0].Contains("R")){
-				$changes += ,$item[2];
-			} else {
-				$changes += ,$item[1];
-			}
-		}
+
+		$item[0] = $item[0].substring(0,1)
+		
+		if($changeType.Contains($item[0]))
+		{
+				if($item[0].Contains("R")){
+					$changes += ,$item[2]
+				} else {
+					$changes += ,$item[1]
+				}
 		}
 	}
 
