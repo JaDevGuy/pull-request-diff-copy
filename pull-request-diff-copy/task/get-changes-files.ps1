@@ -61,7 +61,7 @@ try {
 
 	$cmdResult = & $expressCmd
 
-	foreach $result in $cmdResult
+	foreach ($result in $cmdResult)
 	{
 		$sha = $result
 		
