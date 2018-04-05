@@ -26,8 +26,12 @@ if ($buildReason -ne "PullRequest")
 
 $branchName = ($env:SYSTEM_PULLREQUEST_SOURCEBRANCH).Replace("refs/heads/","")
 $targetBranch = ($env:SYSTEM_PULLREQUEST_TARGETBRANCH).Replace("refs/heads/","")
-"SYSTEM_PULLREQUEST_SOURCEBRANCH:" + ($env:SYSTEM_PULLREQUEST_SOURCEBRANCH) + ",SYSTEM_PULLREQUEST_TARGETBRANCH："+($env:SYSTEM_PULLREQUEST_TARGETBRANCH)
-"buildReason is $buildReason,branchName is $branchName, targetBranch is $targetBranch"
+
+"SYSTEM_PULLREQUEST_SOURCEBRANCH:" + ($env:SYSTEM_PULLREQUEST_SOURCEBRANCH) 
+"SYSTEM_PULLREQUEST_TARGETBRANCH："+($env:SYSTEM_PULLREQUEST_TARGETBRANCH)
+"buildReason is $buildReason"
+"branchName is $branchName"
+"targetBranch is $targetBranch"
 
 if (!($env:SYSTEM_ACCESSTOKEN ))
 {
@@ -51,7 +55,7 @@ try {
 	
 	"Get $branchName merge-base to $targetBranch"
 
-	git merge-base $env:SYSTEM_PULLREQUEST_TARGETBRANCH $env:SYSTEM_PULLREQUEST_SOURCEBRANCH | foreach
+	git merge-base $targetBranch $branchName | foreach
 	{
 		$sha = $_
 		
@@ -69,7 +73,7 @@ try {
 			return;
 		}
 
-		"get change file: " + $_
+		"get changed file: " + $_
 
 		$item = $_.Split([char]0x0009);
 
