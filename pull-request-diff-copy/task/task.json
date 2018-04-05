@@ -18,30 +18,22 @@
    "minimumAgentVersion": "1.95.0",
 	"instanceNameFormat": "Pull Request Diff Copy $(message)",
 	"inputs": [
-	{
-			"name": "destination",
-            "type": "string",
-            "label": "Destination",
-            "defaultValue": "$(Build.ArtifactStagingDirectory)/diff",
-            "required": true,
-            "helpMarkDown": "The directory where files should be placed."
-	},	
-	{
-		"name": "flatten",
-		"type": "boolean",
-		"label": "Flatten",
-		"defaultValue": false,
-		"required": false,
-		"helpMarkDown": "Flatten directory structure (all files to same directory)"
-	},
-	{
-		"name": "currentCommit",
-		"type": "boolean",
-		"label": "Only current commit",
-		"defaultValue": false,
-		"required": false,
-		"helpMarkDown": "only copy current commit changes"
-	}
+		{
+				"name": "destination",
+				"type": "string",
+				"label": "Destination",
+				"defaultValue": "$(Build.ArtifactStagingDirectory)/diff",
+				"required": true,
+				"helpMarkDown": "The directory where files should be placed."
+		},	
+		{
+			"name": "flatten",
+			"type": "boolean",
+			"label": "Flatten",
+			"defaultValue": false,
+			"required": false,
+			"helpMarkDown": "Flatten directory structure (all files to same directory)"
+		}
 	],
 	"execution": {
 		"PowerShell3": {

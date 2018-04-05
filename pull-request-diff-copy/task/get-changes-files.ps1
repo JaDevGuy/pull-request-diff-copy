@@ -9,7 +9,7 @@ $isCurrent = Get-VstsInput -Name currentCommit
 
 #$changeType = $changeTypeInput.split(",")
 [boolean]$shouldFlatten = [System.Convert]::ToBoolean($shouldFlattenInput) 
-[boolean]$isCurrentCommit = [System.Convert]::ToBoolean($isCurrent) 
+#[boolean]$isCurrentCommit = [System.Convert]::ToBoolean($isCurrent) 
 
 # $workingDir = $env:SYSTEM_DEFAULTWORKINGDIRECTORY 
 # $destination = "diff"
@@ -38,71 +38,66 @@ try {
    
 	"Setting working directory to: $workingDir" 
 	Set-Location $workingDir
-	git config core.quotepath off
 	
-	git config --global gui.encoding utf-8            
-	git config --global i18n.commit.encoding utf-8    
-	git config --global i18n.logoutputencoding utf-8  
-	git config  i18n.logoutputencoding gbk
+	#git config core.quotepath off
 	
-	git checkout $targetBranch	
-	git checkout $branchName
+	#git config --global gui.encoding utf-8            
+	#git config --global i18n.commit.encoding utf-8    
+	#git config --global i18n.logoutputencoding utf-8  
+	#git config  i18n.logoutputencoding gbk
+	
+	#git checkout $targetBranch	
+	#git checkout $branchName
+	
+	"Get $targetBranch merge-base to master"
+	git merge-base master head | foreach{
+		$sha = $_
+		"merge-base to master commit id is: " + $sha
+	}  
+
+	#[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 	
 	if($isCurrentCommit) {
-		 git rev-parse HEAD | foreach{
-			 $sha = $_
-			 "current commit:" + $sha
-		 }          
+		"git log -m -1 --name-status --pretty=format: $sha > diff.txt;"
+		git log -m -1 --name-status --pretty=format: $sha > diff.txt;
+	
+		git log -m -1 --name-status --pretty=format: $sha | foreach{
+		if($_ -eq "") {
+			return;
+		}
+		"get change file: " + $_    
+		$item = $_.Split([char]0x0009);
+		$item[0] = $item[0].substring(0,1);
+		if($changeType.Contains($item[0])){
+			if($item[0].Contains("R")){
+				$changes += ,$item[2];
+			} else {
+				$changes += ,$item[1];
+			}
+			}
+		}
 	}
 	else {
-		 git merge-base master head | foreach{
-			 $sha = $_
-			 "head commit:" + $sha
-		 }  
-	}
-	[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 	
- if($isCurrentCommit) {
-	"git log -m -1 --name-status --pretty=format: $sha > diff.txt;"
-	 git log -m -1 --name-status --pretty=format: $sha > diff.txt;
- 
-	 git log -m -1 --name-status --pretty=format: $sha | foreach{
-	 if($_ -eq "") {
-		 return;
-	 }
-	 "get change file: " + $_    
-	 $item = $_.Split([char]0x0009);
-	 $item[0] = $item[0].substring(0,1);
-	 if($changeType.Contains($item[0])){
-		 if($item[0].Contains("R")){
-			 $changes += ,$item[2];
-		 } else {
-			 $changes += ,$item[1];
-		 }
-		 }
-	 }
- }
- else {
- 
-	"git diff $sha head --name-status > diff.txt;"
-	git diff $sha head --name-status > diff.txt;
- 
-	git diff $sha head --name-status | foreach{
-	if($_ -eq "") {
-		return;
-	}
-	"get change file: " + $_    
-	$item = $_.Split([char]0x0009);
-	$item[0] = $item[0].substring(0,1);
-	if($changeType.Contains($item[0])){
-		if($item[0].Contains("R")){
-			$changes += ,$item[2];
-		} else {
-			$changes += ,$item[1];
+		"git diff $sha head --name-status > diff.txt;"
+		git diff $sha head --name-status > diff.txt;
+	
+		git diff $sha head --name-status | foreach{
+		if($_ -eq "") {
+			return;
 		}
-	 }
+		"get change file: " + $_    
+		$item = $_.Split([char]0x0009);
+		$item[0] = $item[0].substring(0,1);
+		if($changeType.Contains($item[0])){
+			if($item[0].Contains("R")){
+				$changes += ,$item[2];
+			} else {
+				$changes += ,$item[1];
+			}
+		}
+		}
 	}
- }
 
 	"Copy changes to folder " + $destination
 	$destinationContentFolder = join-path $destination "Content"
