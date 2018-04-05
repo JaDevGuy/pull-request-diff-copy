@@ -57,7 +57,7 @@ try {
 
 	git fetch
 
-	$expressCmd = "git merge-base '$env:SYSTEM_PULLREQUEST_TARGETBRANCH' '$env:SYSTEM_PULLREQUEST_SOURCEBRANCH'"
+	$expressCmd = "git merge-base 'refs/remotes/origin/$targetBranch' 'refs/remotes/origin/$branchName'"
 
 	"Invoke-Expression " + $expressCmd
 
@@ -70,7 +70,7 @@ try {
 		"Command [$expressCmd] return commit id: " + $sha
 	}
 
-	$expressCmd = "git diff '$sha' '$env:SYSTEM_PULLREQUEST_SOURCEBRANCH' --name-status"
+	$expressCmd = "git diff '$sha' 'refs/remotes/origin/$branchName' --name-status"
 
 	"Invoke-Expression " + $expressCmd
 
