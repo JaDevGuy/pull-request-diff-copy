@@ -55,18 +55,22 @@ try {
 	
 	"Get $branchName merge-base to $targetBranch"
 
-	git merge-base $targetBranch $branchName | foreach
+	$expressCmd = "git merge-base $env:SYSTEM_PULLREQUEST_TARGETBRANCH $env:SYSTEM_PULLREQUEST_SOURCEBRANCH"
+
+	Invoke-Expression $expressCmd | foreach
 	{
 		$sha = $_
 		
-		"merge-base to $env:SYSTEM_PULLREQUEST_SOURCEBRANCH commit id is: " + $sha
+		"Command [$expressCmd] return commit id: " + $sha
 	}
 
-	"git diff $sha $env:SYSTEM_PULLREQUEST_SOURCEBRANCH --name-status > diff.txt"
+	$expressCmd = "git diff $sha $env:SYSTEM_PULLREQUEST_SOURCEBRANCH --name-status"
 
-	git diff $sha $env:SYSTEM_PULLREQUEST_SOURCEBRANCH --name-status > diff.txt
+	$expressCmd
+
+	Invoke-Expression $expressCmd > diff.txt
 	
-	git diff $sha $env:SYSTEM_PULLREQUEST_SOURCEBRANCH --name-status | foreach
+	Invoke-Expression $expressCmd | foreach
 	{
 		if($_ -eq "") 
 		{
