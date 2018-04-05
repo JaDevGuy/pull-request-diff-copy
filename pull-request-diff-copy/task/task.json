@@ -2,18 +2,18 @@
     "id": "bbdc143b-c004-4266-8e12-b6481cc22d5a",
     "name": "Pull Request Diff Copy",
     "friendlyName": "Pull Request Diff Copy",
-    "description": "Copy a git branch of all changed files to diff directory",
-    "helpMarkDown": "## Copy a git branch of all changed files to diff directory.this task must trigge by git pull request,[set target branch policy at first](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build)",
+    "description": "Copy all changes in a Pull Request into a Diff folder",
+    "helpMarkDown": "Copy all changes in a Pull Request into a Diff folder. This task must trigge by git pull request,[set target branch policy at first](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build)",
     "category": "Utility",
     "visibility": [
         "Build",
         "Release"
     ],
-    "author": "limin",
+    "author": "LEANSOFT",
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 0
+        "Patch": 1
     },
    "minimumAgentVersion": "1.95.0",
 	"instanceNameFormat": "Pull Request Diff Copy $(message)",
