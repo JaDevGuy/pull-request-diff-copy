@@ -57,9 +57,9 @@ try {
 
 	$expressCmd = "git merge-base $env:SYSTEM_PULLREQUEST_TARGETBRANCH $env:SYSTEM_PULLREQUEST_SOURCEBRANCH"
 
-	$expressCmd
+	"Invoke-Expression " + $expressCmd
 
-	Invoke-Expression $expressCmd | $result
+	$cmdResult = Invoke-Expression $expressCmd
 
 	foreach ($result in $cmdResult)
 	{
@@ -70,20 +70,22 @@ try {
 
 	$expressCmd = "git diff $sha $env:SYSTEM_PULLREQUEST_SOURCEBRANCH --name-status"
 
-	$expressCmd
+	"Invoke-Expression " + $expressCmd
 
-	& $expressCmd > diff.txt
+	Invoke-Expression $expressCmd > diff.txt
+
+	$diffResult = Invoke-Expression $expressCmd
 	
-	& $expressCmd | foreach
+	foreach ($r in $diffResult)
 	{
-		if($_ -eq "") 
+		if($r -eq "") 
 		{
 			return;
 		}
 
-		"get changed file: " + $_
+		"get changed file: " + $r
 
-		$item = $_.Split([char]0x0009);
+		$item = $r.Split([char]0x0009);
 
 		$item[0] = $item[0].substring(0,1)
 		
