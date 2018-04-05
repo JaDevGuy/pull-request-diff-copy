@@ -63,8 +63,8 @@ try {
 	[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 	
  if($isCurrentCommit) {
-	"git log -m -1 --name-status --pretty=format: $sha > join-path $destination diff.txt;"
-	 git log -m -1 --name-status --pretty=format: $sha > join-path $destination diff.txt;
+	"git log -m -1 --name-status --pretty=format: $sha > diff.txt;"
+	 git log -m -1 --name-status --pretty=format: $sha > diff.txt;
  
 	 git log -m -1 --name-status --pretty=format: $sha | foreach{
 	 if($_ -eq "") {
@@ -84,8 +84,8 @@ try {
  }
  else {
  
-	"git diff $sha head --name-status > join-path $destination diff.txt;"
-	git diff $sha head --name-status > join-path $destination diff.txt;
+	"git diff $sha head --name-status > diff.txt;"
+	git diff $sha head --name-status > diff.txt;
  
 	git diff $sha head --name-status | foreach{
 	if($_ -eq "") {
@@ -108,8 +108,8 @@ try {
 	IF($shouldFlatten)
 	{
 		 $changes | foreach {			
-			 $destinationPath = join-path $destination $_.Split("/")[$_.Split("/").Length-1];
-			 "destinationPath is:" + $destinationPath 
+			 $destinationPath = join-path $destination "Content" $_.Split("/")[$_.Split("/").Length-1];
+			 "destinationPath is: " + $destinationPath 
 		   if(-not (Test-Path -Path $destination )){
 				 mkdir $destination
 			}
@@ -120,12 +120,16 @@ try {
 	{
 		$changes | foreach {
 		#"ready copy change file: " + $_ 
-		$destinationPath = join-path $destination $_;
-		"destinationPath is:" + $destinationPath
+		$destinationPath = join-path $destination  "Content"  $_;
+		"destinationPath is: " + $destinationPath
 		New-Item -ItemType File -Path "$destinationPath" -Force | out-null
 		Copy-Item $_ -Destination "$destinationPath" -recurse -container;
 		}
 	}
+
+	"Copy diff.txt into " + $destination
+	$destinationPath = join-path $destination "diff.txt"
+	Copy-Item diff.txt  -Destination "$destinationPath"
 	
  } finally {
    
