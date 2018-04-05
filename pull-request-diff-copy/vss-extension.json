@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "pull-request-diff-copy",
     "name": "Pull Request Diff Copy",
-    "version": "0.1.10",
+    "version": "0.1.11",
     "publisher": "lean-soft",
     "targets": [
         {
