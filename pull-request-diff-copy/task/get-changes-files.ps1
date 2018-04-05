@@ -104,11 +104,12 @@ try {
 	}
  }
 	
-	"var changes value is:" + $changes
+	"Copy changes to folder " + $destination
+	$destinationContentFolder = join-path $destination "Content"
 	IF($shouldFlatten)
 	{
 		 $changes | foreach {			
-			 $destinationPath = join-path $destination $_.Split("/")[$_.Split("/").Length-1];
+			 $destinationPath = join-path $destinationContentFolder $_.Split("/")[$_.Split("/").Length-1];
 			 "destinationPath is: " + $destinationPath 
 		   if(-not (Test-Path -Path $destination )){
 				 mkdir $destination
@@ -120,16 +121,16 @@ try {
 	{
 		$changes | foreach {
 		#"ready copy change file: " + $_ 
-		$destinationPath = join-path $destination $_;
+		$destinationPath = join-path $destinationContentFolder $_;
 		"destinationPath is: " + $destinationPath
 		New-Item -ItemType File -Path "$destinationPath" -Force | out-null
 		Copy-Item $_ -Destination "$destinationPath" -recurse -container;
 		}
 	}
 
-	"Copy diff.txt into " + $destination
 	$destinationPath = join-path $destination "diff.txt"
-	Copy-Item diff.txt  -Destination "$destinationPath"
+	"Copy diff.txt into " + $destinationPath
+	Copy-Item diff.txt -Destination "$destinationPath"
 	
  } finally {
    
