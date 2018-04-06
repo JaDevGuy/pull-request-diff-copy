@@ -11,3 +11,5 @@ Got to [VSTS Marketplace](https://marketplace.visualstudio.com/items?itemName=le
 Pull Request Diff Copy Exntesion is developed and built by TFS  
 
 ![](https://tfs.devopshub.cn/leansoft/_apis/public/build/definitions/38012f6e-2233-4cda-9362-a1d55869272d/72/badge)
+
+## Version Log
