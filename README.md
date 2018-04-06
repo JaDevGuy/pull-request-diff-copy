@@ -5,3 +5,7 @@ When you create a Pull Request, you are actually doing a diff between two branch
 ## Installations
 
 Got to [VSTS Marketplace](https://marketplace.visualstudio.com/items?itemName=lean-soft.pull-request-diff-copy) and click on install.
+
+## Current Build Status
+
+![](https://tfs.devopshub.cn/leansoft/_apis/public/build/definitions/38012f6e-2233-4cda-9362-a1d55869272d/72/badge)
