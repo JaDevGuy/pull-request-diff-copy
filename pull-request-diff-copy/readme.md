@@ -1,6 +1,8 @@
 # Copy the changed files for Pull Reqeust to a folder
 
-When you create a Pull Request, you are actually doing a diff between two branches. It makes sense to get a copy of the diff result for other usage. For example, many teams are trying to do incremental deployment based on the changes in a merge. This extension will help you generate such incremental deployment packages.
+When you create a Pull Request, you are actually doing a diff between two branches. It makes sense to get a copy of the diff result for other usage. 
+
+For example, many teams are trying to do incremental deployment based on the changes in a merge. This extension will help you generate such incremental deployment packages.
 
 ## Current Build Status
 
