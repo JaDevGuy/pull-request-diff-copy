@@ -3,7 +3,7 @@
     "name": "Pull Request Diff Copy",
     "friendlyName": "Pull Request Diff Copy",
     "description": "Copy all changes in a Pull Request into a Diff folder",
-    "helpMarkDown": "Copy all changes in a Pull Request into a Diff folder. This task must trigge by git pull request,[set target branch policy at first](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build)",
+    "helpMarkDown": "Copy all changes in a Pull Request into a Diff folder. This task must trigge by git pull request, [set target branch policy at first](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build)",
     "category": "Utility",
     "visibility": [
         "Build",
@@ -24,7 +24,7 @@
 				"label": "Destination",
 				"defaultValue": "$(Build.ArtifactStagingDirectory)/diff",
 				"required": true,
-				"helpMarkDown": "The directory where files should be placed."
+				"helpMarkDown": "The directory where files should be placed, a subfolder named [Content] will be placed to contain the files. And [diff.txt] will be created in the root."
 		},	
 		{
 			"name": "flatten",
