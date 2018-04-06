@@ -4,7 +4,9 @@ When you create a Pull Request, you are actually doing a diff between two branch
 
 ## Current Build Status
 
-Pull Request Diff Copy Exntesion is developed and built by TFS ![](https://tfs.devopshub.cn/leansoft/_apis/public/build/definitions/38012f6e-2233-4cda-9362-a1d55869272d/72/badge)
+Pull Request Diff Copy Exntesion is developed and built by TFS 
+
+![](https://tfs.devopshub.cn/leansoft/_apis/public/build/definitions/38012f6e-2233-4cda-9362-a1d55869272d/72/badge)
 
 ## Tasks included
 
