@@ -22,7 +22,7 @@
 				"name": "destination",
 				"type": "string",
 				"label": "Destination",
-				"defaultValue": "$(Build.ArtifactStagingDirectory)/diff",
+				"defaultValue": "$(Build.ArtifactStagingDirectory)\\diff",
 				"required": true,
 				"helpMarkDown": "The directory where files should be placed, a subfolder named [Content] will be placed to contain the files. And [diff.txt] will be created in the root."
 		},	
@@ -33,6 +33,14 @@
 			"defaultValue": false,
 			"required": false,
 			"helpMarkDown": "Flatten directory structure (all files to same directory)"
+		},
+		{
+			"name": "utf8withBOM",
+			"type": "boolean",
+			"label": "UTF-8 with BOM",
+			"defaultValue": true,
+			"required": false,
+			"helpMarkDown": "Include BOM with UTF-8 encoding for diff.txt file. [diff.txt] will always be written in UTF-8."
 		}
 	],
 	"execution": {

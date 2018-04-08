@@ -5,7 +5,8 @@ $workingDir = $env:SYSTEM_DEFAULTWORKINGDIRECTORY
 $destination = Get-VstsInput -Name destination -Require
 #$changeTypeInput = Get-VstsInput -Name changeType -Require  ## TODO
 $shouldFlattenInput = Get-VstsInput -Name flatten  
-$isCurrent = Get-VstsInput -Name currentCommit  
+$utf8withBOM = Get-VstsInput -Name utf8withBOM
+#$isCurrent = Get-VstsInput -Name currentCommit  
 
 #$changeType = $changeTypeInput.split(",")
 [boolean]$shouldFlatten = [System.Convert]::ToBoolean($shouldFlattenInput) 
@@ -32,30 +33,14 @@ $targetBranch = ($env:SYSTEM_PULLREQUEST_TARGETBRANCH).Replace("refs/heads/","")
 "buildReason is $buildReason"
 "branchName is $branchName"
 "targetBranch is $targetBranch"
-
-if (!($env:SYSTEM_ACCESSTOKEN ))
-{
-   throw ("OAuth token not found. Make sure to have 'Allow Scripts to Access OAuth Token' enabled in the build definition.")
-}
+"UTF-8 with BOM is $utf8withBOM"
 
 try {
    
 	"Setting working directory to: $workingDir" 
 	Set-Location $workingDir
-	
-	#git config core.quotepath off
-	
-	#git config --global gui.encoding utf-8            
-	#git config --global i18n.commit.encoding utf-8    
-	#git config --global i18n.logoutputencoding utf-8  
-	#git config  i18n.logoutputencoding gbk
-	
-	#git checkout $targetBranch	
-	#git checkout $branchName
-	
-	"Get $branchName merge-base to $targetBranch"
 
-	git fetch
+	"Get $branchName merge-base to $targetBranch"
 
 	$expressCmd = "git merge-base 'refs/remotes/origin/$targetBranch' 'refs/remotes/origin/$branchName'"
 
@@ -73,8 +58,6 @@ try {
 	$expressCmd = "git diff '$sha' 'refs/remotes/origin/$branchName' --name-status"
 
 	"Invoke-Expression " + $expressCmd
-
-	Invoke-Expression $expressCmd > diff.txt
 
 	$diffResult = Invoke-Expression $expressCmd
 	
@@ -125,10 +108,17 @@ try {
 		}
 	}
 
+	# Determine if we need BOM with UTF-8 
+	$utf8Bom = New-Object System.Text.UTF8Encoding $False
+	if ($utf8withBOM)
+	{
+		$utf8Bom = New-Object System.Text.UTF8Encoding $True
+	}
+
 	$destinationPath = join-path $destination "diff.txt"
-	"Copy diff.txt into " + $destinationPath
-	Copy-Item diff.txt -Destination "$destinationPath"
-	
+	"Generate diff.txt in " + $destinationPath + " with " + $utf8Bom.EncodingName 
+	[System.IO.File]::WriteAllLines($destinationPath, $diffResult, $utf8Bom)
+
  } finally {
    
 	if ($LastExitCode -ne 0) { 
