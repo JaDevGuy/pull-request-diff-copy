@@ -19,7 +19,6 @@ This extension includes the following tasks
 ### Prerequisites
 
 * Repository must be Git.
-* Allow scripts to access Oauth must be **Enabled**
 * This task must be trigged by pull request,[setup branch policy to trigger a build during Pull Request](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build). If the build is not triggered by a Pull Request, the task will just skip and do nothing.
 
 ## Contribute

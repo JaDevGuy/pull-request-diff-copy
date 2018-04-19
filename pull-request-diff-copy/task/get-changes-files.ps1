@@ -5,18 +5,13 @@ $workingDir = $env:SYSTEM_DEFAULTWORKINGDIRECTORY
 $destination = Get-VstsInput -Name destination -Require
 #$changeTypeInput = Get-VstsInput -Name changeType -Require  ## TODO
 $shouldFlattenInput = Get-VstsInput -Name flatten  
+$shouldContentGenerationInput = Get-VstsInput -Name contentGeneration  
 $utf8withBOM = Get-VstsInput -Name utf8withBOM
-#$isCurrent = Get-VstsInput -Name currentCommit  
 
-#$changeType = $changeTypeInput.split(",")
 [boolean]$shouldFlatten = [System.Convert]::ToBoolean($shouldFlattenInput) 
-#[boolean]$isCurrentCommit = [System.Convert]::ToBoolean($isCurrent) 
+[boolean]$shouldContentGeneration = [System.Convert]::ToBoolean($shouldContentGenerationInput) 
 
-# $workingDir = $env:SYSTEM_DEFAULTWORKINGDIRECTORY 
-# $destination = "diff"
 $changeType = "A,C,M,R,T"
-# $shouldFlatten = $False
-# $isCurrentCommit = $False
 
 $buildReason = $env:BUILD_REASON # PullRequest
 if ($buildReason -ne "PullRequest")
@@ -84,27 +79,42 @@ try {
 		}
 	}
 
-	"Copy changes to folder " + $destination
-	$destinationContentFolder = join-path $destination "Content"
-	IF($shouldFlatten)
-	{
-		 $changes | foreach {			
-			 $destinationPath = join-path $destinationContentFolder $_.Split("/")[$_.Split("/").Length-1];
-			 "destinationPath is: " + $destinationPath 
-		   if(-not (Test-Path -Path $destination )){
-				 mkdir $destination
-			}
-			Copy-Item $_ -Destination "$destinationPath"
-		 } 
+	# if we should generate the content folder with all the diffed files?
+
+	"Clean up the diff folder first ... "
+	if(Test-Path -Path $destination){
+		Remove-Item -Recurse -Force $destination
+		mkdir $destination
 	}
-	else
+
+	$destinationContentFolder = join-path $destination "Content"
+
+	if(Test-Path -Path $destinationContentFolder ){
+		Remove-Item -Recurse -Force $destinationContentFolder
+		mkdir $destinationContentFolder
+	}
+
+	if ($shouldContentGeneration)
 	{
-		$changes | foreach {
-		#"ready copy change file: " + $_ 
-		$destinationPath = join-path $destinationContentFolder $_;
-		"destinationPath is: " + $destinationPath
-		New-Item -ItemType File -Path "$destinationPath" -Force | out-null
-		Copy-Item $_ -Destination "$destinationPath" -recurse -container;
+
+		"Copy changes to folder " + $destination
+		if($shouldFlatten)
+		{
+			 $changes | foreach {			
+				 $destinationPath = join-path $destinationContentFolder $_.Split("/")[$_.Split("/").Length-1];
+				 "destinationPath is: " + $destinationPath 
+				Copy-Item $_ -Destination "$destinationPath"
+			 } 
+		}
+		else
+		{
+			$changes | foreach {
+			#"ready copy change file: " + $_ 
+			$destinationPath = join-path $destinationContentFolder $_;
+			"destinationPath is: " + $destinationPath
+			New-Item -ItemType File -Path "$destinationPath" -Force | out-null
+			Copy-Item $_ -Destination "$destinationPath" -recurse -container;
+			}
 		}
 	}
 
@@ -117,6 +127,9 @@ try {
 
 	$destinationPath = join-path $destination "diff.txt"
 	"Generate diff.txt in " + $destinationPath + " with " + $utf8Bom.EncodingName 
+	if ( -not (Test-Path -Path $destinationPath)){
+		New-Item -ItemType File -Path "$destinationPath" -Force | out-null
+	}
 	[System.IO.File]::WriteAllLines($destinationPath, $diffResult, $utf8Bom)
 
  } finally {

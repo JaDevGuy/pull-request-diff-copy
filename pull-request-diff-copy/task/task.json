@@ -25,6 +25,14 @@
 				"defaultValue": "$(Build.ArtifactStagingDirectory)\\diff",
 				"required": true,
 				"helpMarkDown": "The directory where files should be placed, a subfolder named [Content] will be placed to contain the files. And [diff.txt] will be created in the root."
+		},
+		{
+			"name": "contentGeneration",
+			"type": "boolean",
+			"label": "File List Generation",
+			"defaultValue": true,
+			"required": true,
+			"helpMarkDown": "Controls if we are going to generate the content folder with all diffed files."
 		},	
 		{
 			"name": "flatten",
