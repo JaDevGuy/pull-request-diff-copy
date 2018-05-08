@@ -19,15 +19,15 @@ This extension includes the following tasks
 
 It's very easy to use this extension, you just need to add it right after the 'get source' step in your build definition
 
-![Task](images/prdc-screenshot-01.png)
+![Task](https://raw.githubusercontent.com/lean-soft/pull-request-diff-copy/master/pull-request-diff-copy/images/prdc-screenshot-01.png)
 
 Then trigger the build from a Pull Request, check out this link to [setup branch policy to trigger a build during Pull Request](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build). 
 
-![Task](images/prdc-screenshot-02.png)
+![Task](https://raw.githubusercontent.com/lean-soft/pull-request-diff-copy/master/pull-request-diff-copy/images/prdc-screenshot-02.png)
 
 Finally, if you use publish your artifact, you will be able to grab the diffed files and diff.txt from your bulid summary.
 
-![Task](images/prdc-screenshot-03.png)
+![Task](https://raw.githubusercontent.com/lean-soft/pull-request-diff-copy/master/pull-request-diff-copy/images/prdc-screenshot-03.png)
 
 ## Contribute
 
@@ -37,4 +37,4 @@ You can create issues on our [GitHub repo](https://github.com/lean-soft/pull-req
 
 Thanks for the development team from Bank of Beijing being early adopter for this extension.
 
-![Logo of Bank of Beijing](images/logo.gif)
+![Logo of Bank of Beijing](https://raw.githubusercontent.com/lean-soft/pull-request-diff-copy/master/pull-request-diff-copy/images/BOB-logo.gif)
