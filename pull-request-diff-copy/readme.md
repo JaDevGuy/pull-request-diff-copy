@@ -4,12 +4,6 @@ When you create a Pull Request, you are actually doing a diff between two branch
 
 For example, many teams are trying to do incremental deployment based on the changes in a merge. This extension will help you generate such incremental deployment packages.
 
-## Current Build Status
-
-Pull Request Diff Copy Exntesion is developed, built and released by Team Foundation Server.
-
-![](https://tfs.devopshub.cn/leansoft/_apis/public/build/definitions/38012f6e-2233-4cda-9362-a1d55869272d/72/badge)
-
 ## Tasks included
 
 This extension includes the following tasks
@@ -19,12 +13,28 @@ This extension includes the following tasks
 ### Prerequisites
 
 * Repository must be Git.
-* This task must be trigged by pull request,[setup branch policy to trigger a build during Pull Request](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build). If the build is not triggered by a Pull Request, the task will just skip and do nothing.
+* This task must be trigged by pull request, [setup branch policy to trigger a build during Pull Request](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build). If the build is not triggered by a Pull Request, the task will just skip and do nothing.
+
+## Quick Start
+
+It's very easy to use this extension, you just need to add it right after the 'get source' step in your build definition
+
+![Task](images/prdc-screenshot-01.png)
+
+Then trigger the build from a Pull Request, check out this link to [setup branch policy to trigger a build during Pull Request](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build). 
+
+![Task](images/prdc-screenshot-02.png)
+
+Finally, if you use publish your artifact, you will be able to grab the diffed files and diff.txt from your bulid summary.
+
+![Task](images/prdc-screenshot-03.png)
 
 ## Contribute
 
 You can create issues on our [GitHub repo](https://github.com/lean-soft/pull-request-diff-copy) or send a Pull Request. Our Developer will keep watching the events on the repo and get back to your as soon as possible.
 
-## Special Thanks
+## Sponsorship
 
-This extension is created by Li Xiaoming based on [Git Copy Diff](https://marketplace.visualstudio.com/items?itemName=visualbean.VisualBean-GitCopyDiff). Thanks for the Author Alexander Carlsen.
+Thanks for the development team from Bank of Beijing being early adopter for this extension.
+
+![Logo of Bank of Beijing](images/logo.gif)

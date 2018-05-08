@@ -38,12 +38,27 @@
 	    "Git"
 	  ],
 	  	"screenshots": [
-	    
+            {
+                "path": "images/prdc-screenshot-01.png"
+            },
+            {
+                "path": "images/prdc-screenshot-02.png"
+            },
+            {
+                "path": "images/prdc-screenshot-03.png"
+            }
 	  ],
 		"repository": {
 			"type":"git",
 	      	"uri": "https://github.com/lean-soft/pull-request-diff-copy"
-	    },
+        },
+        "badges": [
+            {
+                "href": "https://github.com/lean-soft/pull-request-diff-copy",
+                "uri": "https://tfs.devopshub.cn/leansoft/_apis/public/build/definitions/38012f6e-2233-4cda-9362-a1d55869272d/72/badge",
+                "description": "Pull Request Diff Copy CI Status"
+            }
+        ],
     "contributions": [
         {
             "id": "pull-request-diff-copy",
