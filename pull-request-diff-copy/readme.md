@@ -4,11 +4,17 @@ When you create a Pull Request, you are actually doing a diff between two branch
 
 For example, many teams are trying to do incremental deployment based on the changes in a merge. This extension will help you generate such incremental deployment packages.
 
+## Sponsorship
+
+This extension is sponsored and developed with Bank of Beijing. Thanks for the great contribution from Bank of Beijing Software DevCenter engineering team.
+
+![Logo of Bank of Beijing](https://raw.githubusercontent.com/lean-soft/pull-request-diff-copy/master/pull-request-diff-copy/images/BOB-logo.gif)
+
 ## Tasks included
 
 This extension includes the following tasks
 
-* Pull Request Diff Copy - you can specify a target folder to contain your diff files and there will be diff.txt created inside the folder which includes a list of file full paths for later usage, e.g. as a filter for [File Copy] tasks.
+* **Pull Request Diff Copy** - you can specify a target folder to contain your diff files and there will be diff.txt created inside the folder which includes a list of file full paths for later usage, e.g. as a filter for [File Copy] tasks.
 
 ### Prerequisites
 
@@ -32,9 +38,3 @@ Finally, if you use publish your artifact, you will be able to grab the diffed f
 ## Contribute
 
 You can create issues on our [GitHub repo](https://github.com/lean-soft/pull-request-diff-copy) or send a Pull Request. Our Developer will keep watching the events on the repo and get back to your as soon as possible.
-
-## Sponsorship
-
-Thanks for the development team from Bank of Beijing being early adopter for this extension.
-
-![Logo of Bank of Beijing](https://raw.githubusercontent.com/lean-soft/pull-request-diff-copy/master/pull-request-diff-copy/images/BOB-logo.gif)
