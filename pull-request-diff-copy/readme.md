@@ -21,6 +21,12 @@ This extension includes the following tasks
 * Repository must be Git.
 * This task must be trigged by pull request, [setup branch policy to trigger a build during Pull Request](https://docs.microsoft.com/zh-cn/vsts/git/branch-policies?view=vsts#require-the-pull-request-to-build). If the build is not triggered by a Pull Request, the task will just skip and do nothing.
 
+### Feature
+
+* TFS and VSTS with Windows Build Agents (Linux build agent support is coming soon)
+* Branch and Fork
+* Diffed file list and generate diff.txt for later usage
+
 ## Quick Start
 
 It's very easy to use this extension, you just need to add it right after the 'get source' step in your build definition
