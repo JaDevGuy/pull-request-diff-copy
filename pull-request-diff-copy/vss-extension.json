@@ -8,21 +8,24 @@
         {
             "id": "Microsoft.VisualStudio.Services"
         }
-    ],  
+    ],
     "galleryFlags": [
         "Public",
         "Preview"
-    ],  
+    ],
     "description": "Copy the changes on Pull Request to a folder",
     "categories": [
         "Build and release"
     ],
     "icons": {
-        "default": "images/extension-icon.png"        
+        "default": "images/extension-icon.png"
     },
     "files": [
         {
-            "path": "task"
+            "path": "pull-request-diff-copy-windows"
+        },
+        {
+            "path": "pull-request-diff-copy-cross-platform"
         }
     ],
     "content": {
@@ -30,35 +33,35 @@
             "path": "readme.md"
         }
     },
-	 "tags": [
-	    "Copy",
-	    "Branch Changes",
-		"Git Diff",
-	    "Build",
-	    "Git"
-	  ],
-	  	"screenshots": [
-            {
-                "path": "images/prdc-screenshot-01.png"
-            },
-            {
-                "path": "images/prdc-screenshot-02.png"
-            },
-            {
-                "path": "images/prdc-screenshot-03.png"
-            }
-	  ],
-		"repository": {
-			"type":"git",
-	      	"uri": "https://github.com/lean-soft/pull-request-diff-copy"
+    "tags": [
+        "Copy",
+        "Branch Changes",
+        "Git Diff",
+        "Build",
+        "Git"
+    ],
+    "screenshots": [
+        {
+            "path": "images/prdc-screenshot-01.png"
         },
-        "badges": [
-            {
-                "href": "https://github.com/lean-soft/pull-request-diff-copy",
-                "uri": "https://tfs.devopshub.cn/leansoft/_apis/public/build/definitions/38012f6e-2233-4cda-9362-a1d55869272d/72/badge",
-                "description": "Pull Request Diff Copy CI Status"
-            }
-        ],
+        {
+            "path": "images/prdc-screenshot-02.png"
+        },
+        {
+            "path": "images/prdc-screenshot-03.png"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/lean-soft/pull-request-diff-copy"
+    },
+    "badges": [
+        {
+            "href": "https://github.com/lean-soft/pull-request-diff-copy",
+            "uri": "https://tfs.devopshub.cn/leansoft/_apis/public/build/definitions/38012f6e-2233-4cda-9362-a1d55869272d/72/badge",
+            "description": "Pull Request Diff Copy CI Status"
+        }
+    ],
     "contributions": [
         {
             "id": "pull-request-diff-copy",
@@ -67,7 +70,17 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "task"
+                "name": "pull-request-diff-copy-windows"
+            }
+        },
+        {
+            "id": "pull-request-diff-copy-cross-platform",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "pull-request-diff-copy-cross-platform"
             }
         }
     ]

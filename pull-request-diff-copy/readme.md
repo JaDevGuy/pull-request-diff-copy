@@ -23,7 +23,7 @@ This extension includes the following tasks
 
 ### Feature
 
-* TFS and VSTS with Windows Build Agents (Linux build agent support is coming soon)
+* TFS and VSTS with Windows Build Agents & Linux Build Agents (You need to use task with 'Cross Platform’, the original task is left in the list for backward compatibility) 
 * Branch and Fork
 * Diffed file list and generate diff.txt for later usage
 

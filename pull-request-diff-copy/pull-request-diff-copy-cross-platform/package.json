@@ -1,0 +1,24 @@
+{
+  "name": "jstask",
+  "version": "1.0.0",
+  "description": "Pull-Request-Diff-Copy-Cross-Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bryanmacfarlane/vsts-sample-ts-task"
+  },
+  "dependencies": {
+    "vsts-task-lib": "^0.9.15"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2",
+    "mockery": "^1.7.0",
+    "shelljs": "^0.7.4",
+    "typescript": "^1.8.10"
+  }
+}

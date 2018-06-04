@@ -1,0 +1,5 @@
+pull-request-diff-copy-cross-platform/node_modules
+pull-request-diff-copy-cross-platform/*.js
+pull-request-diff-copy-cross-platform/*.map
+pull-request-diff-copy-cross-platform/tests/*.map
+pull-request-diff-copy-cross-platform/tests/*.js
