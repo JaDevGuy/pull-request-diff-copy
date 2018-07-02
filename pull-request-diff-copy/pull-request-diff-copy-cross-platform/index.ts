@@ -1,6 +1,4 @@
 import tl = require('vsts-task-lib/task');
-import trm = require('vsts-task-lib/toolrunner');
-import fs = require('fs');
 
 async function run() {
     try {
@@ -19,7 +17,7 @@ async function run() {
 
         if (buildReason != "PullRequest") {
             tl.error("Pull Request Diff Copy will only process when triggered by Pull Request Build.");
-            return
+            return;
         }
 
         let expressCmd: string = "";
@@ -44,8 +42,8 @@ async function run() {
         tl._writeLine(`destination is ${destination}`);
         tl._writeLine(`buildReason is ${buildReason}`);
         tl._writeLine(`branchName is ${branchName}`);
-        tl._writeLine(`targetBranch is ${targetBranch}`)
-        tl._writeLine(`UTF-8 with BOM is ${utf8withBOM}`)
+        tl._writeLine(`targetBranch is ${targetBranch}`);
+        tl._writeLine(`UTF-8 with BOM is ${utf8withBOM}`);
 
 
         tl._writeLine(`Invoke-Expression  ${expressCmd}`);
@@ -87,7 +85,7 @@ async function run() {
 
                 tl._writeLine(`line is ${line}`);
                 // 按  \t分割
-                let lineItem = line.split('\t')
+                let lineItem = line.split('\t');
                 let diffStatus = lineItem[0].substr(0, 1);
 
                 tl._writeLine(`File Status is ${diffStatus}`);
@@ -106,7 +104,7 @@ async function run() {
 
             tl._writeLine("Clean up the diff folder first ... ");
 
-            tl.rmRF(destination)
+            tl.rmRF(destination);
         }
 
         // creat folder
@@ -130,22 +128,22 @@ async function run() {
                 changes.forEach(item => {
                     //mkdir
 
-                    let diffFileFolderPath = item.substr(0, item.lastIndexOf('/'))
+                    let diffFileFolderPath = item.substr(0, item.lastIndexOf('/'));
 
                     if (diffFileFolderPath) {
 
-                        tl._writeLine(`mkdir ${contentDir}/${diffFileFolderPath}`)
+                        tl._writeLine(`mkdir ${contentDir}/${diffFileFolderPath}`);
 
-                        tl.mkdirP(`${contentDir}/${diffFileFolderPath}`)
+                        tl.mkdirP(`${contentDir}/${diffFileFolderPath}`);
 
-                        tl._writeLine(`cp -rf ${item} , ${contentDir}/${diffFileFolderPath}`)
+                        tl._writeLine(`cp -rf ${item} , ${contentDir}/${diffFileFolderPath}`);
 
                         //cp folder
-                        tl.cp(item, `${contentDir}/${diffFileFolderPath}`)
+                        tl.cp(item, `${contentDir}/${diffFileFolderPath}`);
                     } else {
 
                         // cp root files
-                        tl.cp(item, contentDir)
+                        tl.cp(item, contentDir);
                     }
 
 
@@ -157,7 +155,7 @@ async function run() {
 
                 changes.forEach(x => {
 
-                    tl._writeLine(`cp ${x} , ${contentDir}`)
+                    tl._writeLine(`cp ${x} , ${contentDir}`);
                     tl.cp(x, contentDir);
                 })
 
@@ -169,17 +167,17 @@ async function run() {
         tl.mkdirP(destination);
 
 
-        diffContents = process.platform === "win32" ? diffContents.replace('\n', '\r\n') : diffContents;
+        diffContents = process.platform === "win32" ? diffContents.replace(/'\n'/g, '\r\n') : diffContents;
 
-       // tl.
+        // tl.
 
-       tl._writeLine(`${typeof(utf8withBOM)},${true===utf8withBOM}`)
-       
+        tl._writeLine(`${typeof (utf8withBOM)},${true === utf8withBOM}`);
 
-        utf8withBOM ? tl.writeFile(`${destination}/diff.txt`, `\ufeff ${diffContents}`, "utf-8")
+
+        utf8withBOM ? tl.writeFile(`${destination}/diff.txt`, `\ufeff${diffContents}`, "utf-8")
             : tl.writeFile(`${destination}/diff.txt`, diffContents);
 
-        tl._writeLine('Task done ...')
+        tl._writeLine('Task done ...');
 
 
     }

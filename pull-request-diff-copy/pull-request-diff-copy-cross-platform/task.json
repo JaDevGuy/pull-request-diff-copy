@@ -22,7 +22,7 @@
 				"name": "destination",
 				"type": "string",
 				"label": "Destination",
-				"defaultValue": "$(Build.ArtifactStagingDirectory)//diff",
+				"defaultValue": "$(Build.ArtifactStagingDirectory)/diff",
 				"required": true,
 				"helpMarkDown": "The directory where files should be placed, a subfolder named [Content] will be placed to contain the files. And [diff.txt] will be created in the root."
 		},
