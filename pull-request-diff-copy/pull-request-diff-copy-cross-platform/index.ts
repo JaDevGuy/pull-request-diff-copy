@@ -19,7 +19,7 @@ async function run() {
             tl.error("Pull Request Diff Copy will only process when triggered by Pull Request Build.");
             return;
         }
-
+        
         let expressCmd: string = "";
         // SYSTEM_PULLREQUEST_SOURCEBRANCH
         var branchName = tl.getVariable("system.pullRequest.sourceBranch").replace("refs/heads/", "");
@@ -47,6 +47,19 @@ async function run() {
 
 
         tl._writeLine(`Invoke-Expression  ${expressCmd}`);
+        let gitCmd: string="git config core.quotepath off";
+        let git
+        if (process.platform === 'win32') {
+            git = tl.execSync('powershell', `"${gitCmd}"`).stdout.trim();
+
+        }
+        else {
+            git = tl.execSync("bash", `--norc --noprofile -c "${gitCmd}"`).stdout.trim();
+        }
+
+        tl._writeLine(`sha is ${git}`);
+
+
         let stdout
         if (process.platform === 'win32') {
             stdout = tl.execSync('powershell', `"${expressCmd}"`).stdout.trim();

@@ -4,6 +4,10 @@ When you create a Pull Request, you are actually doing a diff between two branch
 
 For example, many teams are trying to do incremental deployment based on the changes in a merge. This extension will help you generate such incremental deployment packages.
 
+[![Version Badge][marketplace-version-badge]][extension-marketplace-url]
+[![Installs Badge][marketplace-installs-badge]][extension-marketplace-url]
+[![Rating Badge][marketplace-rating-badge]][extension-marketplace-url]
+
 ## Sponsorship
 
 This extension is sponsored and developed with Bank of Beijing. Thanks for the great contribution from Bank of Beijing Software DevCenter engineering team.
